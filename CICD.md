@@ -37,8 +37,6 @@ Developers must integrate or merge their changes back to the main branch as ofte
 
 GitLab is an all-in-one solution that can be used as **SaaS** or **Self-Hosted** in contrast with **Jenkins** that can be used only as self-hosted. **Azure Pipelines** is another option for Microsoft environments in contrast with Jenkins & GitLab that are **open-source**.
 
----
-
 ## Creating .gitlab-ci.yml
 
 We must use the name `.gitlab-ci.yml` as a **YAML** file to configure CI/CD for our application. This file must be located in the root folder of our app.
