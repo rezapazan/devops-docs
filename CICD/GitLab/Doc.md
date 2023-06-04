@@ -14,6 +14,8 @@
     - [Self-defined Variables](#self-defined-variables)
   - [GitLab Architecture](#gitlab-architecture)
     - [Executors](#executors)
+    - [Runners](#runners)
+  - [Overriding Docker Image](#overriding-docker-image)
   
 # GitLab CI/CD
 
@@ -234,5 +236,22 @@ The runner & executor info can be seen in the pipeline logs. Each job may be exe
 We have 3 different runner groups:
 - shared runners: for all projects & groups in a GitLab instance
 - group runners: for all projects in a group
-- specific runner: for a specific project
+- specific runner: for a specific project (self-managed) 
 
+To configure a specific runner, we have to set up a machine, install GitLab runner program, then connect the runner to the GitLab instance.
+
+## Overriding Docker Image
+
+We can change to docker image that is used to execute the jobs, in case we need a specific program e.g. an image with node.
+
+```yml
+image: node:17-alpine
+```
+
+If we add this line of code to the `.gitlab-ci.yml` file, all jobs will be executed using the specified image.
+
+**Best Practice:** Always specify image version. `latest` is unpredictable.
+
+We can define `image` for each job, that overrides the global image definition.
+
+**Note:** Image configuration works only for docker runners, and will be ignored by other runners.
