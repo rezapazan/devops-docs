@@ -216,13 +216,23 @@ GitLab runners do no execute code themselves. They fetch jobs from GitLab and pa
 
 **Note:** All required programs for executing the jobs, need to be installed manually. It makes managing dependencies & migration hard.
 
-A better alternative executor to shell, is **Docker Executor**. It executes jobs inside a docker container, and for each job a new fresh container is used. Images are user provided.
+- A better alternative executor to shell, is **Docker Executor**. It executes jobs inside a docker container, and for each job a new fresh container is used. Images are user provided.
 
-Another option is **Virtual Machine Executor**. It has the overhead of OS, and is good for environments that have not docker. 
+- Another option is **Virtual Machine Executor**. It has the overhead of OS, and is good for environments that have not docker. 
 
-**Kubernetes Executor** allows us to use an existing kubernetes cluster for our jobs. It will create a new pod for each job, and is highly scalable.
+- **Kubernetes Executor** allows us to use an existing kubernetes cluster for our jobs. It will create a new pod for each job, and is highly scalable.
 
-**Docker Machine Executor** supports auto scaling. It let's us create docker hosts on demand, dynamically. It's a managing layer over docker. GitLab shared runners use this executor.
+- **Docker Machine Executor** supports auto scaling. It let's us create docker hosts on demand, dynamically. It's a managing layer over docker. GitLab shared runners use this executor.
 **Note:** Docker Machine is deprecated by docker.
 
-The best option is docker executor for most use cases. We can configure one executor per runner. If we need more executors we can register more runners on the same server.
+The best option is docker executor for most use cases. We can configure one executor per runner. If we need more executors we can register more runners on the same server. 
+
+### Runners
+
+The runner & executor info can be seen in the pipeline logs. Each job may be executed on a completely different runner. The point is the execution environments are totally isolated.
+
+We have 3 different runner groups:
+- shared runners: for all projects & groups in a GitLab instance
+- group runners: for all projects in a group
+- specific runner: for a specific project
+
