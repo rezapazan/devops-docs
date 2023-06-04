@@ -7,3 +7,5 @@ Techs added until now:
   - [Architectures](https://github.com/rezapazan/DevOpsDocs/blob/main/Cloud/Architecture.md)
 - [Network](https://github.com/rezapazan/DevOpsDocs/tree/main/Network)
   - [CDN](https://github.com/rezapazan/DevOpsDocs/blob/main/Network/CDN.md)
+  - [DHCP](https://github.com/rezapazan/DevOpsDocs/blob/main/Network/DHCP.md)
+  - [DNS](https://github.com/rezapazan/DevOpsDocs/blob/main/Network/DNS.md)
