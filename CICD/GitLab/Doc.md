@@ -240,6 +240,21 @@ We have 3 different runner groups:
 
 To configure a specific runner, we have to set up a machine, install GitLab runner program, then connect the runner to the GitLab instance.
 
+[Creating & Registering Runners' guide.](https://docs.gitlab.com/runner/install/)
+
+To specify specific runners for jobs, we must use tags the filter the list of available runners. **To pick & run a job, a runner must be assigned every tag listed in the job.**
+
+```yml
+run_unit_tests:
+  tags:
+    - ec2
+    - aws
+    - remote
+  stage: test
+  script:
+    - echo ""
+```
+
 ## Overriding Docker Image
 
 We can change to docker image that is used to execute the jobs, in case we need a specific program e.g. an image with node.
