@@ -91,3 +91,43 @@ The created network is isolated from the default bridge.
 **Note:** We get a DNS service in the created network, so we can ping containers by their names.
 
 ## Host
+
+When you add a container to the host network, it inherits the IP & everything from the host, so you don't have to expose any ports. The container operates like all other local apps, so there is no isoloation.
+
+## MACVLAN
+
+This type of network has two modes:
+- bridge mode
+- 802.1q mode
+
+### Bridge Mode
+
+Using this type of netowrk is like connecting containers directly to the physical network. The containers get their own MAC addresses, and they'll have their own IP addresses on our network. First, let's create a MACVLAN network:
+
+```bash
+$ docker network create -d macvlan --subnet [Our_Netowrk_Subnet] --gateway [our_network_gateway] -o parent=[host_network_interface] [network_name]
+```
+
+We add the `parent` option to tie the MACVLAN network to the host physical network interface, BUT we have to assign the IP address ourselves. It has no DHCP. If we don't specify the IP address, docker will assign a conflicting IP address like there are two DHCP servers in the network.
+
+```bash
+$ docker run -itd --rm --network [network_name] --ip [IP_address] --name [container_name] [image_name]
+```
+
+**IMPORTANT:** If we try to ping anything from a MACVLAN container when we have multiple containers in that network, we get nothing. Since each container gets its own MAC address, the network cannot accept multiple MAC addresses on a single switch port. One solution is to activate **promiscuous mode** on all devices, but it's a nightmare!!
+
+**Note:** Promiscuous mode is a mode for a network device that gathers all the traffic to a single processing center.
+
+MACVLAN has DNS resolution & we don't have to expose any ports since each container gets their own IP address.
+
+### 802.1q Mode
+
+In this mode, a VLAN interface is created for each container like they are actual interfaces on the host & each interface can have their own network info e.g. IP address settings.
+
+```bash
+$ docker network create -d macvlan --subnet [network_subnet] --gateway [network_gateway] -o parent=[host_interface].[random_num] [network_name]
+```
+
+**Note:** For this mode we must have **trunking** set up.
+
+## IPVLAN
