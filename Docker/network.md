@@ -4,6 +4,12 @@
   - [Bridge](#bridge)
   - [User-Defined Bridge](#user-defined-bridge)
   - [Host](#host)
+  - [MACVLAN](#macvlan)
+    - [Bridge Mode](#bridge-mode)
+    - [802.1q Mode](#8021q-mode)
+  - [IPVLAN](#ipvlan)
+  - [Overlay](#overlay)
+  - [None](#none)
 
 
 # Docker Network
@@ -131,3 +137,35 @@ $ docker network create -d macvlan --subnet [network_subnet] --gateway [network_
 **Note:** For this mode we must have **trunking** set up.
 
 ## IPVLAN
+
+This network type has 2 modes:
+- L2
+- L3
+  
+**L2** is the same as MACVLAN, but instead of giving each container a unique MAC address, it allows the host to share its MAC address with the containers. They'll also get their own IP addresses on the network.
+
+```bash
+$ docker network create -d ipvlan --subnet [subnet_IP] --gateway [gateway_IP] -o parent=[interface_name] [network_name]
+```
+
+**Note:** we still have the IP address assigning issue when we run a container in this network mode. We must assign an IP address manually.
+
+**L3** means everything happens in layer 3 of netowrk architecture, so we don't have switching, arp, etc. We have IP addresses. This mode connects containers to the host & it acts like the switch. There is no broadcast traffic.
+
+**Note:** Containers cannot reach anything on the network by default in this mode. Since everything is about routing no one has any routes about the so called netowrk, but you have controll over configuring it.
+
+To solve the reachability issue, we have to set a static route in our main network, and tell it if you want to reach the containers go through the host.
+
+```bash
+$ docker network create -d ipvlan --subnet [subnet_IP] -o parent=[interface_name] -o ipvlan_mode=l3 --subnet [second_subnet_IP] [network_name]
+```
+
+**Note:** Containers in this mode can ping each other, even by name.
+
+## Overlay
+
+This network is used when there are containers across multiple hosts, and meybe there is orchestration, and these containers want to talk to each other. An overlay comes to play & simplifies the complexities of the real infrastructure.
+
+## None
+
+There is nothing in this network, and when you add a container to this network it only has loopback as its interface.
