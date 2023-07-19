@@ -5,11 +5,11 @@
 
 # Dockerfile
 
-`RUN` is a command that adds a layer to our image & build process. `RUN` commands are executed during build.
-`CMD` command is executed be default when we run the container.
-`ENTRYPOINT` command gives you the ability to change the default entry point of `docker run <image>` command.
+- `RUN` is a command that adds a layer to our image & build process. `RUN` commands are executed during build.
+- `CMD` command is executed be default when we run the container.
+- `ENTRYPOINT` command gives you the ability to change the default entry point of `docker run <image>` command.
   for more info see [this link](https://stackoverflow.com/a/34245657).
-`USER` changes the user executing the commands.
+- `USER` changes the user executing the commands.
 
 ## Multi-Stage Builds
 
