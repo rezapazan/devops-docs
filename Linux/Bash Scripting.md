@@ -9,6 +9,14 @@
   - [Execute Commands in Script](#execute-commands-in-script)
   - [Math in terminal](#math-in-terminal)
   - [Conditionals](#conditionals)
+  - [Case Statements](#case-statements)
+  - [Loops](#loops)
+    - [While](#while)
+    - [Until](#until)
+    - [For](#for)
+      - [Break & Continue](#break--continue)
+        - [Break](#break)
+        - [Continue](#continue)
 
 <!-- /code_chunk_output -->
 
@@ -82,3 +90,151 @@ $ echo $(( 2 + 3 ))
 ```
 
 ## Conditionals
+
+```bash
+if [[ $coffee == "y" || $tarnished == $beast ]]; then
+  echo "You're Awesome!"
+else
+  echo "Leave right now!"
+  exit 1
+fi
+```
+
+**NOTE:** `||` is or, `&&` is and.
+**NOTE:** We can nest `if` statements.
+
+```bash
+if [[ $coffee == "y" ]]; then
+  echo "You are Awesome!"
+elif [[ $coffee == "n" ]]; then
+  echo "Get out!"
+else
+  echo "Wrong Answer."
+fi
+```
+
+## Case Statements
+
+```bash
+echo "Enter your class:
+1- Samurai
+2- Prisoner
+3- Prophet"
+
+read class
+
+case $class in
+  1)
+    type="Samurai"
+    hp=10
+    ;;
+
+  2)
+    type="Prisoner"
+    hp=20
+    ;;
+esac
+```
+
+## Loops
+
+### While
+
+```bash
+x=1
+
+while [[ $x -le 100 ]]
+do
+  read -p "Pushup $x: Press enter to continue"
+  (( x ++ ))
+done
+```
+
+reading files:
+
+```bash
+while read -r line; do
+echo "Line $x $line"
+(( x ++ ))
+done < hamlet
+```
+
+**NOTE:** `while true` goes on forever.
+
+### Until
+
+``` bash
+until [[ $order == "coffee" ]]
+do
+  echo "Would you like coffee or tea?"
+  read order
+done
+echo "Excellent choice, here is your coffee."
+```
+
+### For
+
+```bash
+for cups in {1..10};
+do
+  echo "You've had $cups cups of coffee today."
+done
+```
+
+Checking Domains:
+
+```bash
+for x in google.com bing.com facebook.com;
+do
+  if ping -q -c 2 -W 1 $x > /dev/null; then
+    echo "$x is up"
+  else
+    echo "$x is down"
+  fi
+done
+```
+
+**NOTE:** `-q` is quiet, `-c` is count if ICMP packets, `-W` is wait time.
+
+```bash
+for x in $(cat cities.txt);
+do
+  weather=$(curl -s http://wttr.in/$x?format=3)
+  echo "The weather for $weather"
+done
+```
+
+#### Break & Continue
+
+##### Break
+
+```bash
+#!/bin/bash
+
+echo "What do you want to check?"
+read target
+
+while true;
+do
+  if ping -q -c 2 -w 1 $target > /dev/null; then
+    echo "Hey, You're up!!"
+    break
+  else
+    echo "$target is currently down."
+  fi
+sleep 2
+done
+```
+
+##### Continue
+
+```bash
+for x in {1..17};
+do
+  if [[ $x == 13 ]]; then
+    continue
+  fi
+  echo "Floor $x"
+  sleep 1
+done
+```
