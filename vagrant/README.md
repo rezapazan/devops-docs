@@ -1,4 +1,22 @@
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
 # Installing Vagrant/Packer on Ubuntu/Debian
+
+- [Installing Vagrant/Packer on Ubuntu/Debian](#installing-vagrantpacker-on-ubuntudebian)
+  - [Add the HashiCorp GPG key](#add-the-hashicorp-gpg-key)
+  - [Add the official HashiCorp Linux repository](#add-the-official-hashicorp-linux-repository)
+  - [Update & Install](#update--install)
+  - [Add public box in vagrant](#add-public-box-in-vagrant)
+    - [Using Public Boxes](#using-public-boxes)
+      - [Adding a bento box to Vagrant](#adding-a-bento-box-to-vagrant)
+    - [Using a bento box in a Vagrantfile](#using-a-bento-box-in-a-vagrantfile)
+  - [Building Boxes](#building-boxes)
+    - [Clone bento Project](#clone-bento-project)
+    - [To build an Ubuntu 18.04 box for only the VirtualBox provider](#to-build-an-ubuntu-1804-box-for-only-the-virtualbox-provider)
+
+<!-- /code_chunk_output -->
 
 ## Add the HashiCorp GPG key
 

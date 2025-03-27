@@ -1,7 +1,9 @@
 # DevOps Docs
+
 This repo contains documents of any technology I manage to learn related to DevOps.
 
 Techs added until now:
+
 - [Docker](https://github.com/rezapazan/devops-docs/tree/main/Docker)
   - [Dockerfile](https://github.com/rezapazan/devops-docs/blob/main/Docker/docker_file.md)
   - [docker-compose](https://github.com/rezapazan/devops-docs/blob/main/Docker/docker-compose.md)
@@ -13,3 +15,4 @@ Techs added until now:
 - [Cloud](https://github.com/rezapazan/devops-docs/tree/main/Cloud)
   - [Architectures](https://github.com/rezapazan/devops-docs/blob/main/Cloud/Architecture.md)
 - [GitLab CI/CD](https://github.com/rezapazan/devops-docs/blob/main/CICD.md)
+- [Vagrant](https://github.com/rezapazan/devops-docs/tree/main/vagrant)
